@@ -1,13 +1,7 @@
-import {useRef, useState} from "react";
-import DisplayName from "./DisplayName.jsx";
-import {ItemState} from "./store/ContextStore";
+import Sample from "./UseReducerHook/Sample.jsx";
 
 function App() {
-   let [name, setName] = useState("");
-
-   return <ItemState.Provider value={""}>
-      <DisplayName/>
-   </ItemState.Provider>;
+  return <Sample />;
 }
 
-export default App;
+export default App
