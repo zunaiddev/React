@@ -1,15 +1,16 @@
 import {useContext, useRef} from "react";
-import {PostsContext} from "./PostsContextProvider.jsx";
+
+import {PostsContext} from "../store/PostsContext.jsx";
 
 function Form() {
     const titleRef = useRef(null);
     const bioRef = useRef(null);
 
-    const {method} = useContext(PostsContext);
+    const {dispatchPostList} = useContext(PostsContext);
 
     function handleSubmit(e) {
         e.preventDefault();
-        method({type: "ADD_POST", payload: {title: titleRef.current.value, bio: bioRef.current.value}});
+        dispatchPostList({type: "ADD_POST", payload: {title: titleRef.current.value, bio: bioRef.current.value}});
         titleRef.current.value = bioRef.current.value = "";
     }
 

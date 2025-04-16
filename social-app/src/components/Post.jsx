@@ -1,9 +1,14 @@
 import {FaTrash} from "react-icons/fa";
 import {useContext} from "react";
-import {PostsContext} from "./PostsContextProvider.jsx";
+
+import {PostsContext} from "../store/PostsContext.jsx";
 
 function Post({title, bio}) {
-    const {method} = useContext(PostsContext);
+    const {dispatchPostList} = useContext(PostsContext);
+
+    function handleDelete() {
+        dispatchPostList({type: "DELETE_POST", payload: {title}});
+    }
 
     return (
         <div className="relative">
@@ -14,7 +19,7 @@ function Post({title, bio}) {
                 <p className="font-normal text-gray-700 dark:text-gray-400">{bio}</p>
             </a>
             <FaTrash className="size-4 hover:text-red-700 absolute bottom-2 right-2 cursor-pointer"
-                     onClick={() => method({type: "DELETE_POST", payload: {title}})}/>
+                     onClick={handleDelete}/>
         </div>
     );
 }
