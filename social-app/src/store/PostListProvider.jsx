@@ -12,6 +12,8 @@ function PostsReducer(state, action) {
                 reactions: action.payload.reactions,
                 tags: action.payload.tags,
             }, ...state];
+        case "ADD_POSTS":
+            return action.payload.data;
         case "DELETE_POST":
             return state.filter(post => post.id !== action.payload.id);
         default:

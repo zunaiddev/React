@@ -1,7 +1,7 @@
-import Sample from "./UseReducerHook/Sample.jsx";
+import BharatClock from "./BharatClock/BharatClock.jsx";
 
 function App() {
-  return <Sample />;
+  return <BharatClock/>;
 }
 
 export default App
