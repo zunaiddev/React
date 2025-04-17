@@ -1,7 +1,14 @@
-import BharatClock from "./BharatClock/BharatClock.jsx";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import About from "./About.jsx";
+import Home from "./Home.jsx";
 
 function App() {
-  return <BharatClock/>;
+  return <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+      <Route path="/about" element={<About/>}/>
+    </Routes>
+  </BrowserRouter>
 }
 
 export default App
