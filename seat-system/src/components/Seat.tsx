@@ -1,20 +1,43 @@
-import type {SeatType} from "./SeatType.ts";
-import type {MouseEventHandler} from "react";
+import {type SeatType} from "./SeatType.ts";
+import {useEffect, useState} from "react";
 
 type SeatProps = {
-    text: number,
+    text: number | null,
     type: SeatType,
-    disabled: boolean,
-    onClick: MouseEventHandler,
+    seatNo: string,
+    add: (val: string) => void,
+    remove: (val: string) => void,
+    bookedSeats: string[],
+    selectedSeats: string[],
 }
 
-function Seat({text, type, disabled, onClick}: SeatProps) {
+function Seat({text, type, seatNo, add, remove, bookedSeats, selectedSeats}: SeatProps) {
+    const [selected, setSelected] = useState<boolean>(false);
+    const [booked, setBooked] = useState<boolean>(false);
+
+    useEffect(() => {
+        setBooked(bookedSeats?.includes(seatNo) ?? false);
+    }, [seatNo, bookedSeats]);
+
+    useEffect(() => {
+        setSelected(selectedSeats?.includes(seatNo) ?? false);
+    }, [selectedSeats, seatNo]);
+
+
+    function handleOnClick(): void {
+        if (selected) {
+            remove(seatNo);
+        } else {
+            add(seatNo);
+        }
+    }
+
     return (
-        <button className={`py-2 px-3 rounded-t-lg cursor-pointer text-white ${
-            type === 0 ? "bg-green-400/40" : type === 1 ? "bg-pink-400/40" : type === 2 ? "bg-amber-400/40" :
-                type === 3 ? "bg-blue-400/40" : "bg-gray-400/40"
-        } `}
-                disabled={disabled} onClick={onClick}>
+        <button
+            className={`h-10 w-8 rounded-t-lg cursor-pointer text-white border-2 ${selected
+                ? "bg-emerald-900 border-green-400" : booked
+                    ? "bg-gray-400/20 border-gray-400" : type}`}
+            disabled={booked} onClick={handleOnClick}>
             {text}
         </button>
     );
